@@ -1,36 +1,4 @@
-# Ignore SpecFlow scenarios by tags for xUnit runner
-
-## Usage
-Tag your scenarios with tag like @Superseded, @Manual or @Draft (tags can be modified in `FeatureGeneration.targets`)
-
-## Examples
-```gherkin 
-Feature: Calculations
-    In order to perform basic calculations
-    As a user of this program
-    I want to be told results of calculations
-    
-@Superseded
-Scenario: Perform calculations
-    Given An outdated test
-    When I perform outdated operation
-    Then Some Result will be produced    
-```
-
-```gherkin
-Feature: NewFunctions
-	
-@Draft
-Scenario: Draft scenario
-	Given I have a number 90	
-	When I take sinus of the number
-	Then I will receive 1
-```
-
-## Implementation
-Add `FeatureGeneration.targets` file to your project
-```xml
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTarget="GeneratePatchedFeatureFiles" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\SpecFlow.2.3.0\tools\TechTalk.SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.2.3.0\tools\TechTalk.SpecFlow.targets')" />
      
@@ -73,10 +41,3 @@ Add `FeatureGeneration.targets` file to your project
     </Task>
   </UsingTask>
 </Project>
-```
-
-Then add following lines to your .csproj file 
-```xml
-  <Import Project="FeatureGeneration.targets" />
-  <Target Name="BeforeBuild" DependsOnTargets="GeneratePatchedFeatureFiles" />
-```
